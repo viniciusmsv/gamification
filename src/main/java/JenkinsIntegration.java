@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class JenkinsIntegration {
 
+    //https://github.com/jenkinsci/java-client-api
     public static void main(String[] args) throws URISyntaxException, IOException {
         JenkinsServer jenkins = new JenkinsServer(new URI("http://ci.jenkins-ci.org/"), "admin", "password");
         Map<String, Job> jobs = jenkins.getJobs();

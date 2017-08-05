@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class GitLabIntegration {
 
-
+    //https://github.com/gmessner/gitlab4j-api
     public static void main(String[] args) throws GitLabApiException {
         GitLabApi gitLabApi = new GitLabApi(GitLabApi.ApiVersion.V3, "https://gitlabcorp.stefanini.com.br/", "zQRcytA7mBoz81Zi7gqi");
         Group group = gitLabApi.getGroupApi().getGroup(31);
