@@ -13,19 +13,20 @@ public class JenkinsIntegration {
 
     //https://github.com/jenkinsci/java-client-api
     public static void main(String[] args) throws URISyntaxException, IOException {
-        JenkinsServer jenkins = new JenkinsServer(new URI("http://ci.jenkins-ci.org/"), "admin", "password");
+        JenkinsServer jenkins = new JenkinsServer(new URI("http://10.2.106.79:8081/"), "stefanini", "stefanini");
         Map<String, Job> jobs = jenkins.getJobs();
         for (Map.Entry<String, Job> jobEntry : jobs.entrySet()) {
             jobEntry.getValue().details().getAllBuilds();
+
             for (Build build : jobEntry.getValue().details().getAllBuilds()) {
                 BuildResult result = build.details().getResult();
-                System.out.println(result);
+                System.out.println(build.details().getFullDisplayName() + " - " + result);
 
-                BuildChangeSet buildChangeSet = build.details().getChangeSet();
-
-                List<BuildChangeSetAuthor> list = build.details().getCulprits();
-                for (BuildChangeSetAuthor buildChangeSetAuthor : list) {
-                    System.out.println(buildChangeSetAuthor.getFullName());
+                List<BuildCause> list = build.details().getCauses();
+                for (BuildCause buildCause : list) {
+                    if(buildCause.getShortDescription().contains("Iniciado")){
+                        System.out.println(buildCause.getUserId());
+                    }
                 }
             }
         }
