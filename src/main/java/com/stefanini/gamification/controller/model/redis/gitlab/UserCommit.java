@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class UserCommit implements Key {
 
-    public static final String PREFIX = "gitlab:";
+    public static final String PREFIX = "gitlab";
 
     private String user;
 
@@ -49,6 +49,6 @@ public class UserCommit implements Key {
 
     @Override
     public String getKey() {
-        return PREFIX+period+user;
+        return PREFIX + SEPARATOR + period + SEPARATOR + user;
     }
 }

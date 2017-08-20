@@ -18,16 +18,16 @@ public class GitLabRepository {
     public void loadUserCommits(Map<String, Long> userCommits, LocalDate date){
         for (String user : userCommits.keySet()) {
             UserCommit userCommit = new UserCommit(user,userCommits.get(user),date);
-            BoundHashOperations<String, String, String> ops = this.template.boundHashOps(userCommit.getKey());
-            ops.put(user, userCommits.get(user).toString());
+            BoundHashOperations<String, String, String> ops = this.template.boundHashOps("gitlab");
+            ops.put(userCommit.getKey(), userCommits.get(user).toString());
         }
     }
 
     public void searchAll() throws Exception {
-        String key = "gitlab:*";
+        String key = "gitlab";
         BoundHashOperations<String, String,String> ops = this.template.boundHashOps(key);
-        for (String s : ops.values()) {
-            System.out.println("Found key " + key + ", value=" + s);
+        for (String s : ops.keys()) {
+            System.out.println("Found key " + s + ", value=" + ops.get(s));
         }
     }
 }
