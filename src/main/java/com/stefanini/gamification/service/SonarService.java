@@ -1,7 +1,6 @@
-import org.sonar.wsclient.Sonar;
-import org.sonar.wsclient.services.Query;
+package com.stefanini.gamification.service;
 
-public class SonarIntegration {
+public class SonarService {
 
     //https://sonarcloud.io/web_api/
     public static void main(String[] args) {
