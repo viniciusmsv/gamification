@@ -3,10 +3,11 @@ package com.stefanini.gamification.controller.model.redis.gitlab;
 import com.stefanini.gamification.controller.model.redis.Key;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 
 public class UserCommit implements Key {
 
-    public static final String PREFIX = "gitlab";
+    public static final String PREFIX = "gitlab:commits";
 
     private String user;
 
@@ -49,6 +50,10 @@ public class UserCommit implements Key {
 
     @Override
     public String getKey() {
-        return PREFIX + SEPARATOR + period + SEPARATOR + user;
+        return PREFIX + SEPARATOR + YearMonth.from(period);
+    }
+
+    public String getField(){
+        return user;
     }
 }

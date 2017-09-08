@@ -2,6 +2,8 @@ package com.stefanini.gamification.controller;
 
 import com.stefanini.gamification.service.GitLabService;
 import org.gitlab4j.api.GitLabApiException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import java.time.LocalDate;
 @Controller
 @RequestMapping("/gitlab")
 public class GitLabController {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     GitLabService gitLabService;
@@ -37,6 +41,7 @@ public class GitLabController {
         try {
             return ResponseEntity.ok(gitLabService.totalCommits(null, null));
         } catch (GitLabApiException e) {
+            log.error(e.getMessage(), e);
             return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
         }
     }
